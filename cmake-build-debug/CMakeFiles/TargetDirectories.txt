@@ -1,0 +1,5 @@
+/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/CMakeFiles/diccionario.dir
+/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/CMakeFiles/palabras_validas_diccionario.dir
+/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/CMakeFiles/doc_doxygen.dir
+/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/CMakeFiles/rebuild_cache.dir

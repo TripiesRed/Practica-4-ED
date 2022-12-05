@@ -1,0 +1,6 @@
+PROJECT_NAME           = "Práctica 5. Juego de las Letras - Árbol para Diccionario"
+OUTPUT_DIRECTORY       = /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/doc_doxygen/
+INPUT                  = /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/doc
+GENERATE_LATEX         = NO
+IMAGE_PATH             = /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/doc
+EXTRACT_PRIVATE	       = NO

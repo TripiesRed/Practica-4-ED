@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-/*  srand(time(NULL));
+  srand(time(NULL));
 
   ifstream dict_file(argv[1]);
   vector <char> available_letters;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
   for (auto word: available_words){
     cout << word << endl;
-  }*/
+  }
 
   return 0;
 }

@@ -19,7 +19,7 @@ private:
     /**
      * @brief Struct to represent a character inside the tree.
      *
-     * The struct contains information about the character it that node, and
+     * The struct contains information about the character in that node, and
      * information marking if a valid word of the dictionary finishes in
      * that character
      */
@@ -212,9 +212,9 @@ public:
 
         iterator &operator++();
 
-        bool operator==(const iterator &other);
+        bool operator==(const iterator &other) const;
 
-        bool operator!=(const iterator &other);
+        bool operator!=(const iterator &other) const;
 
     };
 

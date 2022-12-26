@@ -9,6 +9,8 @@
 #include "dictionary.h"
 #include <cmath>
 
+using namespace std;
+
 ///////////////////////////////////////////////////////////////////////////////
 //                             Private functions                             //
 ///////////////////////////////////////////////////////////////////////////////
@@ -123,15 +125,15 @@ Dictionary &Dictionary::operator=(const Dictionary &dic){
 //                               I/O overload                                //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*std::ostream& operator<<(std::ostream &os, const Dictionary &dict){
+ostream& operator<<(std::ostream &os, const Dictionary &dict){
   for(Dictionary::iterator it = dict.begin();it != dict.end(); ++it){
-    os << *it << std::endl;
+    os << *it << endl;
   }
   return os;
-}*/
+}
 
-std::istream& operator>>(std::istream &is, Dictionary &dict){
-  std::string curr_word;
+istream& operator>>(std::istream &is, Dictionary &dict){
+  string curr_word;
   while (getline(is, curr_word)){
     dict.insert(curr_word);
   }
@@ -154,40 +156,72 @@ int Dictionary::getTotalUsages(const char c){
 //                                 Iterator                                  //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*Dictionary::iterator::iterator() {
-
-}
+Dictionary::iterator::iterator() = default;
 
 Dictionary::iterator::iterator(tree<char_info>::const_preorder_iterator iter) {
-
+    this->iter = iter;
 }
 
 std::string Dictionary::iterator::operator*() {
-
+    return this->curr_word;
 }
 
 Dictionary::iterator &Dictionary::iterator::operator++() {
 
+    do {
+
+        int last_lvl = iter.get_level();
+        ++iter;
+
+        if (this->iter.get_level() == last_lvl) {
+            this->curr_word.pop_back();
+            this->curr_word += (*iter).character;
+        } else if (this->iter.get_level() == last_lvl + 1)
+            this->curr_word += (*iter).character;
+
+        else {
+            if (iter.get_level() != 0) {
+                int i = 0, diff = ::abs(last_lvl - iter.get_level());
+                while (i < diff) {
+                    this->curr_word.pop_back();
+                    i++;
+                }
+                this->curr_word.pop_back();
+                this->curr_word += (*iter).character;
+            }
+            else
+                this->curr_word.clear();
+        }
+
+        if(iter.get_level() == 0) return *this;
+
+    } while (!(*iter).valid_word );
+
+
+    return *this;
 }
 
-bool Dictionary::iterator::operator==(const iterator &other) {
-
+bool Dictionary::iterator::operator==(const iterator &other) const{
+    bool iguales = this->iter == other.iter;
+    return iguales;
 }
 
-bool Dictionary::iterator::operator!=(const iterator &other) {
-
+bool Dictionary::iterator::operator!=(const iterator &other) const{
+    bool distintos = this->iter != other.iter;
+    return distintos;
 }
 
 Dictionary::iterator Dictionary::begin() const {
-
+    return this->words.cbegin_preorder();
 }
 
 Dictionary::iterator Dictionary::end() const {
-
-}*/
+    Dictionary::iterator it;
+    return it;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
-//                            Letters Iterator                               //
+//                            Possible Words Iterator                               //
 ///////////////////////////////////////////////////////////////////////////////
 
 /*

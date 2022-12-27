@@ -43,13 +43,54 @@ Dictionary::node Dictionary::insertCharacter(char character, Dictionary::node cu
   }
 }
 
-/*int Dictionary::getOccurrences(node curr_node, char c){
+int Dictionary::getOccurrences(node curr_node, char c){
+    int ocurrences = 0;
 
+    if(*curr_node == c){
+        ocurrences++;
+    }
+
+    if(!curr_node.left_child().is_null()){
+        ocurrences += getOccurrences(curr_node.left_child(), c);
+    }
+
+    if(!curr_node.right_sibling().is_null()){
+        ocurrences += getOccurrences(curr_node.right_sibling(), c);
+    }
+
+    return ocurrences;
 }
 
 std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
 
-}*/
+    // 1
+    int char_ocurrences = 0;
+    int word_number = 0;
+
+    std::pair<int, int> left_child (0, 0);
+    std::pair<int, int> rigth_sibling (0, 0);
+
+    // 2
+    if(!curr_node.left_child().is_null()){
+        left_child = getTotalUsages(curr_node.left_child(), c);
+    }
+
+    if(!curr_node.right_sibling().is_null()) {
+        rigth_sibling = getTotalUsages(curr_node.right_sibling(), c);
+    }
+
+    // 3
+    char_ocurrences = std::get<0>(left_child) + std::get<0>(rigth_sibling);
+    word_number = std::get<1>(left_child) + std::get<1>(rigth_sibling);
+
+    // 4
+    if(*curr_node == c){
+        char_ocurrences += std::get<1>(left_child);
+    }
+
+    if(*curr_node.valid_word)
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                              Public functions                             //
@@ -144,11 +185,13 @@ istream& operator>>(std::istream &is, Dictionary &dict){
 //                            Recursive counters                             //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*int Dictionary::getOccurrences(const char c){
+int Dictionary::getOccurrences(const char c){
+    node root = words.get_root();
 
+    return getOccurrences(root, c);
 }
 
-int Dictionary::getTotalUsages(const char c){
+/*int Dictionary::getTotalUsages(const char c){
 
 }*/
 

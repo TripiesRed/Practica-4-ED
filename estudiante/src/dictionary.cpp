@@ -88,7 +88,18 @@ std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
         char_ocurrences += std::get<1>(left_child);
     }
 
-    if(*curr_node.valid_word)
+    // 5
+    if((*curr_node).valid_word){
+        word_number++;
+    }
+    /*if(*curr_node == c){
+        char_ocurrences ++;
+    }*/
+
+    std::pair<int, int> result (char_ocurrences, word_number);
+
+    // 6
+    return result;
 
 }
 
@@ -191,9 +202,13 @@ int Dictionary::getOccurrences(const char c){
     return getOccurrences(root, c);
 }
 
-/*int Dictionary::getTotalUsages(const char c){
+int Dictionary::getTotalUsages(const char c){
+    node root = words.get_root();
 
-}*/
+    int total_usages = std::get<0>(getTotalUsages(root, c));
+
+    return total_usages;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                 Iterator                                  //

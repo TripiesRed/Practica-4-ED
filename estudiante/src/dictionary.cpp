@@ -47,7 +47,7 @@ Dictionary::node Dictionary::insertCharacter(char character, Dictionary::node cu
 int Dictionary::getOccurrences(node curr_node, char c){
     int ocurrences = 0;
 
-    if(*curr_node == c){
+    if((*curr_node).character == c){
         ocurrences++;
     }
 
@@ -64,14 +64,12 @@ int Dictionary::getOccurrences(node curr_node, char c){
 
 std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
 
-    // 1
     int char_ocurrences = 0;
     int word_number = 0;
 
     std::pair<int, int> left_child (0, 0);
     std::pair<int, int> rigth_sibling (0, 0);
 
-    // 2
     if(!curr_node.left_child().is_null()){
         left_child = getTotalUsages(curr_node.left_child(), c);
     }
@@ -80,28 +78,22 @@ std::pair<int, int> Dictionary::getTotalUsages(node curr_node, char c){
         rigth_sibling = getTotalUsages(curr_node.right_sibling(), c);
     }
 
-    // 3
     char_ocurrences = std::get<0>(left_child) + std::get<0>(rigth_sibling);
     word_number = std::get<1>(left_child) + std::get<1>(rigth_sibling);
 
-    // 4
-    if(*curr_node == c){
+    if((*curr_node).character == c){
         char_ocurrences += std::get<1>(left_child);
     }
 
-    // 5
     if((*curr_node).valid_word){
         word_number++;
+        if((*curr_node).character == c){
+            char_ocurrences ++;
+        }
     }
-    /*if(*curr_node == c){
-        char_ocurrences ++;
-    }*/
 
     std::pair<int, int> result (char_ocurrences, word_number);
-
-    // 6
     return result;
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

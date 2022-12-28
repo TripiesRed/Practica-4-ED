@@ -11,13 +11,13 @@ if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/cantidad_letras.cpp)
   add_executable(cantidad_letras
     ${BASE_FOLDER}/src/cantidad_letras.cpp
     ${BASE_FOLDER}/src/dictionary.cpp
-    ${BASE_FOLDER}/src/letters_set.cpp ../../../../letters_set.cpp ../../../../letters_set.h estudiante/src/cantidad_letras.cpp estudiante/src/cantidad_letras.cpp estudiante/src/cantidad_letras.cpp estudiante/src/cantidad_letras.cpp)
+    ${BASE_FOLDER}/src/letters_set.cpp estudiante/include/letters_set.h estudiante/src/cantidad_letras.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/diccionario.cpp)
   add_executable(diccionario
     ${BASE_FOLDER}/src/diccionario.cpp
-    ${BASE_FOLDER}/src/dictionary.cpp estudiante/src/cantidad_letras.cpp)
+    ${BASE_FOLDER}/src/dictionary.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras.cpp)

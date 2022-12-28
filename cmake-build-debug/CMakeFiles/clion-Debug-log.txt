@@ -1,17 +1,5 @@
-/snap/clion/219/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/diegoos_03/CLionProjects/Practica-4-ED -B /home/diegoos_03/CLionProjects/Practica-4-ED/cmake-build-debug
+/snap/clion/219/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/219/bin/ninja/linux/ninja -G Ninja -S /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras -B /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug
 Doxygen build started
 -- Configuring done
-CMake Error at CMakeLists.txt:11 (add_executable):
-  Cannot find source file:
-
-    ../../../../letters_set.cpp
-
-  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h
-  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc
-
-
-CMake Error at CMakeLists.txt:11 (add_executable):
-  No SOURCES given to target: cantidad_letras
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Generating done
+-- Build files have been written to: /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug

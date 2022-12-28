@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
   vector <string> available_words;
   for (auto it = dictionary.possible_words_begin(available_letters); it != dictionary.possible_words_end(); ++it) {
     available_words.push_back(*it);
+    cout << *it << endl;
+    cout << "PEGA" << endl;
   }
 
   for (auto word: available_words){

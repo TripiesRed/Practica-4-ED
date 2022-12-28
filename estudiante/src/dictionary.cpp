@@ -8,6 +8,7 @@
 #include <set>
 #include "dictionary.h"
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -227,14 +228,15 @@ std::string Dictionary::iterator::operator*() {
 Dictionary::iterator &Dictionary::iterator::operator++() {
 
     do {
-
         int last_lvl = iter.get_level();
         ++iter;
 
         if (this->iter.get_level() == last_lvl) {
             this->curr_word.pop_back();
             this->curr_word += (*iter).character;
-        } else if (this->iter.get_level() == last_lvl + 1)
+        }
+
+        else if (this->iter.get_level() == last_lvl + 1)
             this->curr_word += (*iter).character;
 
         else {
@@ -270,55 +272,150 @@ bool Dictionary::iterator::operator!=(const iterator &other) const{
 }
 
 Dictionary::iterator Dictionary::begin() const {
-    return this->words.cbegin_preorder();
+    Dictionary::iterator inicio = this->words.cbegin_preorder();
+    ++inicio;
+    return inicio;
 }
 
 Dictionary::iterator Dictionary::end() const {
-    Dictionary::iterator it;
-    return it;
+    return this->words.cend_preorder();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //                            Possible Words Iterator                               //
 ///////////////////////////////////////////////////////////////////////////////
 
-/*
 Dictionary::possible_words_iterator Dictionary::possible_words_begin(vector<char> available_characters) const {
-
+    Dictionary::possible_words_iterator inicio(this->words.get_root(), available_characters);
+    return inicio;
 }
 
 Dictionary::possible_words_iterator Dictionary::possible_words_end() const {
-
+    Dictionary::possible_words_iterator final;
+    return final;
 }
 
-Dictionary::possible_words_iterator::possible_words_iterator() {
-
+Dictionary::possible_words_iterator::possible_words_iterator(){
+    level = 0;
+    current_word = "";
+    current_node = node();
+    available_letters =  multiset<char>();
 }
 
 Dictionary::possible_words_iterator::possible_words_iterator(node current_node, vector<char> available_letters){
+    this->current_node = current_node;
 
+    int tam = available_letters.size();
+    for (int i = 0; i < tam; ++i) this->available_letters.insert(available_letters[i]);
+
+    level = 0;
+    current_word = "";
 }
 
 Dictionary::possible_words_iterator::possible_words_iterator(const possible_words_iterator &other){
-
+    *this = other;
 }
 
 Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operator=(const Dictionary::possible_words_iterator &other) {
+    this->available_letters = other.available_letters;
+    this->current_node = other.current_node;
+    this->current_word = other.current_word;
+    this->level = other.level;
 
+    return *this;
 }
 
 bool Dictionary::possible_words_iterator::operator==(const Dictionary::possible_words_iterator &other) const {
+    bool iguales = true;
 
+    if ( (this->current_node!=other.current_node) || (this->current_word!=other.current_word) || (this->level!=other.level) )
+        iguales = false;
+
+    return iguales;
 }
 
 bool Dictionary::possible_words_iterator::operator!=(const Dictionary::possible_words_iterator &other) const {
+    bool distintos = true;
 
+    if (*this==other) distintos = false;
+
+    return distintos;
+}
+
+bool Dictionary::possible_words_iterator::disponible(const char c) const {
+    bool available = false;
+    if(count(this->current_word.begin(),this->current_word.end(),c) < this->available_letters.count(c) || this->current_word == "")
+        available = true;
+    return available;
 }
 
 Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operator++() {
+    do{
+        if (!this->current_node.is_null()) {
+            cout << "ENTRA" << endl;
+            if (!this->current_node.left_child().is_null()) {
+                if(disponible((*this->current_node.left_child()).character)){
+                    cout << "ANIADE HIJO IZQ" << endl;
+                    this->current_node = this->current_node.left_child();
+                    this->level++;
+                    this->current_word+= (*this->current_node).character;
+                }
+                else{
+                    this->current_node = this->current_node.left_child();
+                    while(!this->current_node.right_sibling().is_null()
+                        && !disponible((*this->current_node.right_sibling()).character))
+                        this->current_node = this->current_node.right_sibling();
 
+                    if (!this->current_node.right_sibling().is_null()){
+                        cout << "ANIADE HIJO DER" << endl;
+                        this->current_node = this->current_node.right_sibling();
+                        this->level++;
+                        this->current_word+= (*this->current_node).character;
+                    } else {
+                        this->current_node = this->current_node.parent().parent().right_sibling();
+                        this->level-=2;
+                        for(int i=0; i<2; i++)this->current_word.pop_back();
+                        cout << "BORRA2" << endl;
+                    }
+                }
+
+            } else if (!this->current_node.right_sibling().is_null() && disponible((*this->current_node.right_sibling()).character)) {
+                cout << "VERIFIC" << endl;
+                cout << this->current_word << " " << this->level << " " << this->current_node.operator*().character << endl;
+                this->current_node = this->current_node.right_sibling();
+                this->current_word+= (*this->current_node).character;
+                cout << this->current_word << " " << this->level << " " << this->current_node.operator*().character << endl;
+            } else {
+                cout << "BORRA" << endl;
+                while (!this->current_node.parent().is_null() &&
+                       (this->current_node.parent().right_sibling().is_null() || this->current_node.parent().right_sibling() == this->current_node)){
+                    this->current_node = this->current_node.parent();
+                    this->level--;
+                    this->current_word.pop_back();
+                    cout << this->current_word << " " << this->level << " " << this->current_node.operator*().character << endl;
+                }
+                this->current_word.pop_back();
+                if (this->current_node.parent().is_null()){
+                    this->current_node = node();
+                } else {
+                    this->current_node = this->current_node.parent().right_sibling();
+                    this->level--;
+                    this->current_word.pop_back();
+
+                    if(disponible((*this->current_node.left_child()).character)) {
+                        cout << "YEI" << endl;
+                        this->current_word += (*this->current_node).character;
+                        cout << this->current_word << " " << this->level << " "
+                             << this->current_node.operator*().character << endl;
+                    }
+                }
+            }
+        }
+        cout << "NEXT" << endl;
+    }while(!(*this->current_node).valid_word);
+    return *this;
 }
 
 std::string Dictionary::possible_words_iterator::operator*() const {
-
-}*/
+    return this->current_word;
+}

@@ -248,6 +248,15 @@ public:
         node current_node;
         string current_word;
 
+        /**
+         * @brief Comprueba si un caracter está disponible en @p available_letters, y si el número de ocurrencias del
+         * mismo en @p current_word no supera al número de ocurrencias en @p available_letters.
+         * @param c Carácter a comprobar
+         * @return Booleano que indica si el caracter aún se puede usar para formar una palabra (true), o false en
+         * caso de que no esté disponible o si ha sido usado todas las veces posibles.
+         */
+        bool disponible(const char c) const;
+
     };
 
     possible_words_iterator possible_words_begin(vector<char> available_characters) const;

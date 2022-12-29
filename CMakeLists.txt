@@ -26,13 +26,13 @@ if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras.cpp)
     ${BASE_FOLDER}/src/letters_set.cpp
     ${BASE_FOLDER}/src/letters_bag.cpp
     ${BASE_FOLDER}/src/solver.cpp
-    ${BASE_FOLDER}/src/dictionary.cpp estudiante/src/solver.cpp estudiante/include/solver.h estudiante/src/partida_letras.cpp)
+    ${BASE_FOLDER}/src/dictionary.cpp )
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/palabras_validas_diccionario.cpp)
     add_executable(palabras_validas_diccionario
             ${BASE_FOLDER}/src/palabras_validas_diccionario.cpp
-            ${BASE_FOLDER}/src/dictionary.cpp estudiante/src/solver.cpp)
+            ${BASE_FOLDER}/src/dictionary.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras_eficiente.cpp)

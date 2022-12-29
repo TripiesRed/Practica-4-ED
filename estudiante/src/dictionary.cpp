@@ -279,6 +279,7 @@ Dictionary::iterator Dictionary::end() const {
 
 Dictionary::possible_words_iterator Dictionary::possible_words_begin(vector<char> available_characters) const {
     Dictionary::possible_words_iterator inicio(this->words.get_root(), available_characters);
+    ++inicio;
     return inicio;
 }
 
@@ -342,69 +343,81 @@ bool Dictionary::possible_words_iterator::disponible(const char c) const {
 }
 
 Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operator++() {
+
+    bool valida = false; //Señal que nos indica cuando hayamos encontrado una palabra válida
     do{
-        if (!this->current_node.is_null()) {
-            cout << "ENTRA" << endl;
-            if (!this->current_node.left_child().is_null()) {
-                if(disponible((*this->current_node.left_child()).character)){
-                    cout << "ANIADE HIJO IZQ" << endl;
-                    this->current_node = this->current_node.left_child();
-                    this->level++;
-                    this->current_word+= (*this->current_node).character;
-                }
-                else{
-                    this->current_node = this->current_node.left_child();
-                    while(!this->current_node.right_sibling().is_null()
-                        && !disponible((*this->current_node.right_sibling()).character))
-                        this->current_node = this->current_node.right_sibling();
+        //Primera iteración cuando comenzamos en la raíz para evitar que se imprima el primer elemento nulo
+        if(this->level==0){
+            this->current_node=this->current_node.left_child();
+            this->level++;
+        }
 
-                    if (!this->current_node.right_sibling().is_null()){
-                        cout << "ANIADE HIJO DER" << endl;
-                        this->current_node = this->current_node.right_sibling();
-                        this->level++;
-                        this->current_word+= (*this->current_node).character;
-                    } else {
-                        this->current_node = this->current_node.parent().parent().right_sibling();
-                        this->level-=2;
-                        for(int i=0; i<2; i++)this->current_word.pop_back();
-                        cout << "BORRA2" << endl;
-                    }
-                }
+        if (!this->current_node.is_null()) { //Comprobamos si el nodo actual es nulo
 
-            } else if (!this->current_node.right_sibling().is_null() && disponible((*this->current_node.right_sibling()).character)) {
-                cout << "VERIFIC" << endl;
-                cout << this->current_word << " " << this->level << " " << this->current_node.operator*().character << endl;
+            //Comprobamos si la letra del nodo actual la podemos utilizar
+            if(this->available_letters.count((*this->current_node).character)!=0){
+
+                //Añadimos la letra a la palabra y la eliminamos de entre las disponibles
+                this->current_word+=(*this->current_node).character;
+                this->available_letters.erase(this->available_letters.find((*this->current_node).character));
+
+                //En caso de estar en una palabra válida, activamos la señal
+                if((*this->current_node).valid_word) valida = true;
+
+                //Si el hijo izquierdo del nodo actual no es nulo nos colocamos en el
+                if (!this->current_node.left_child().is_null()) {
+                    this->current_node = this->current_node.left_child();
+                    level++;
+                }
+            }
+
+            //En caso de que no podamos usar el nodo actual, nos colocamos en su hermano derecho (si no es nulo)
+            else if (!this->current_node.right_sibling().is_null()){
+                if(this->current_word.at(this->current_word.length()-1) == (*this->current_node).character) {
+                    this->available_letters.insert((*this->current_node).character);
+                    this->current_word.pop_back();
+                }
                 this->current_node = this->current_node.right_sibling();
-                this->current_word+= (*this->current_node).character;
-                cout << this->current_word << " " << this->level << " " << this->current_node.operator*().character << endl;
-            } else {
-                cout << "BORRA" << endl;
+            }
+
+            //En caso de que no podamos usar el nodo actual y no tenga hermano derecho
+            else{
+                //Subimos por la rama actual hasta llegar al primer nodo cuyo hermano derecho no es nulo o hayamos
+                //vuelto a la raíz
                 while (!this->current_node.parent().is_null() &&
-                       (this->current_node.parent().right_sibling().is_null() || this->current_node.parent().right_sibling() == this->current_node)){
+                       (this->current_node.right_sibling().is_null() || this->current_node.right_sibling() == this->current_node)){
+
+                    //Devolvemos las letras utilizadas al conjunto de letras disponibles a medida que subimos
+                    if(this->current_word.at(this->current_word.length()-1) == (*this->current_node).character) {
+                        this->available_letters.insert((*this->current_node).character);
+                        this->current_word.pop_back();
+                    }
+
+                    //Subimos de nivel y nodo
                     this->current_node = this->current_node.parent();
                     this->level--;
-                    this->current_word.pop_back();
-                    cout << this->current_word << " " << this->level << " " << this->current_node.operator*().character << endl;
                 }
-                this->current_word.pop_back();
+
+                //Si el nodo actual es la raíz, entonces hemos terminado luego el nodo actual pasa ser vacío
                 if (this->current_node.parent().is_null()){
                     this->current_node = node();
-                } else {
-                    this->current_node = this->current_node.parent().right_sibling();
-                    this->level--;
-                    this->current_word.pop_back();
+                }
 
-                    if(disponible((*this->current_node.left_child()).character)) {
-                        cout << "YEI" << endl;
-                        this->current_word += (*this->current_node).character;
-                        cout << this->current_word << " " << this->level << " "
-                             << this->current_node.operator*().character << endl;
-                    }
+                //Si el nodo actual tiene un hermano derecho no nulo, devolvemos la letra del nodo actual al conjunto
+                // y nos posicionamos en su hermano derecho
+                else {
+                    this->available_letters.insert((*this->current_node).character);
+                    this->current_word.pop_back();
+                    this->current_node = this->current_node.right_sibling();
                 }
             }
         }
-        cout << "NEXT" << endl;
-    }while(!(*this->current_node).valid_word);
+
+        //En caso de haber vuelto a la raíz, terminamos
+        if(this->level == 0) return *this;
+
+    }while(!valida); //Repetir hasta encontrar una palabra válida
+
     return *this;
 }
 

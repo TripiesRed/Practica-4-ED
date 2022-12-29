@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 #include "solver.h"
+#include <letters_set.h>
+#include "letters_bag.h"
 
 using namespace std;
 

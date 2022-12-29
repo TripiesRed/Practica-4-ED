@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
   srand(time(NULL));
-/*
+
   ifstream dict_file(argv[1]);
   vector <char> available_letters;
   for (int i = 2; i < argc; ++i) {
@@ -27,13 +27,11 @@ int main(int argc, char *argv[])
   vector <string> available_words;
   for (auto it = dictionary.possible_words_begin(available_letters); it != dictionary.possible_words_end(); ++it) {
     available_words.push_back(*it);
-    cout << *it << endl;
-    cout << "PEGA" << endl;
   }
 
   for (auto word: available_words){
     cout << word << endl;
   }
-*/
+
   return 0;
 }

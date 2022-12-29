@@ -6,7 +6,7 @@
 #define P04_JUEGO_LETRAS_SOLVER_H
 
 #include "dictionary.h"
-#include "letters_set.h"
+#include <letters_set.h>
 #include "letters_bag.h"
 #include <vector>
 #include <string>

@@ -1,23 +1,12 @@
 # ninja log v5
-1	254	1672227168954626660	CMakeFiles/diccionario.dir/estudiante/src/cantidad_letras.cpp.o	7f2c03d01bce6320
 1	238	1672230618518080394	CMakeFiles/cantidad_letras.dir/estudiante/src/cantidad_letras.cpp.o	662cbbe8028fcb65
 1	259	1672239501699002348	CMakeFiles/diccionario.dir/estudiante/src/dictionary.cpp.o	a3be1cb2b5733a1
 1	288	1672230618570054057	CMakeFiles/cantidad_letras.dir/estudiante/src/dictionary.cpp.o	18eaacbfc5ed516b
 0	293	1672246615280193798	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/palabras_validas_diccionario.cpp.o	ea3c07e1e8f6bb7c
-0	58	1672227937541698270	build.ninja	37681de3c2912ad4
+0	58	1672252021803016931	build.ninja	37681de3c2912ad4
 1	233	1672227168934607844	CMakeFiles/diccionario.dir/estudiante/src/diccionario.cpp.o	c3f252e5d860f77a
-397	449	1672250928336498337	palabras_validas_diccionario	d3fffb8a952daf8
+340	380	1672251614745684489	palabras_validas_diccionario	d3fffb8a952daf8
 259	292	1672239501731006854	diccionario	dad07ad2e55acee0
 288	332	1672230618614031773	cantidad_letras	d900cf6abb4d416e
 1	286	1672227279938777193	CMakeFiles/cantidad_letras.dir/estudiante/src/letters_set.cpp.o	c9c012eb00a02222
-1	397	1672250928284306471	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/dictionary.cpp.o	213646169c0e03b2
-0	349	1672250990138872434	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/dictionary.cpp.o	213646169c0e03b2
-349	388	1672250990174903705	palabras_validas_diccionario	d3fffb8a952daf8
-0	387	1672251009097246732	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/dictionary.cpp.o	213646169c0e03b2
-387	434	1672251009145278470	palabras_validas_diccionario	d3fffb8a952daf8
-0	344	1672251068085699124	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/dictionary.cpp.o	213646169c0e03b2
-344	384	1672251068125645565	palabras_validas_diccionario	d3fffb8a952daf8
-1	431	1672251525951672079	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/dictionary.cpp.o	213646169c0e03b2
-431	494	1672251526011684051	palabras_validas_diccionario	d3fffb8a952daf8
 0	340	1672251614705707755	CMakeFiles/palabras_validas_diccionario.dir/estudiante/src/dictionary.cpp.o	213646169c0e03b2
-340	380	1672251614745684489	palabras_validas_diccionario	d3fffb8a952daf8

@@ -1,4 +1,4 @@
-# Install script for directory: /home/diegoos_03/CLionProjects/Practica-4-ED
+# Install script for directory: /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/diegoos_03/CLionProjects/Practica-4-ED/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

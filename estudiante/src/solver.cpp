@@ -7,7 +7,7 @@
 #include "solver.h"
 #include <letters_set.h>
 #include "letters_bag.h"
-
+// Esritorio
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -21,6 +21,9 @@ bool Solver::DoIHaveTheLettersINeed (const string word, const vector<char> &avai
     for(int i = 0; i < word.length() && letters_ok; i++){
         vector<char>::iterator vt;
         vt = find (copy_available.begin(), copy_available.end(), word.at(i));
+        if(vt == copy_available.end()){
+            vt = find (copy_available.begin(), copy_available.end(), ::toupper(word.at(i)));
+        }
 
         if(vt != copy_available.end()) {
             copy_available.erase(vt);
@@ -42,23 +45,31 @@ pair<vector<string>, int> Solver::getSolutionsLength(const vector<char> &availab
                 list.push_back(*it);
         }
     }
-
-    string max = list[0];
-    vector<string> sols;
-    for(int i = 1; i <= list.size(); i++){
-        if(max.length() < list[i].length()){
-            max = list[i];
+    if(!list.empty()) {
+        string max = list[0];
+        vector<string> sols;
+        for (int i = 1; i <= list.size(); i++) {
+            if (max.length() < list[i].length()) {
+                max = list[i];
+            }
         }
-    }
 
-    for(int i = 0; i<= list.size(); i++){
-        if(max.length() == list[i].length()){
-            sols.push_back(list[i]);
+        for (int i = 0; i <= list.size(); i++) {
+            if (max.length() == list[i].length()) {
+                sols.push_back(list[i]);
+            }
         }
-    }
 
-    std::pair<vector<string>, int> result (sols, max.length());
-    return result;
+        std::pair<vector<string>, int> result(sols, max.length());
+        return result;
+    }
+    else{
+        vector<string> sols;
+        sols.clear();
+        int punt = 0;
+        std::pair<vector<string>, int> result(sols, punt);
+        return result;
+    }
 }
 
 pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available_letters) {

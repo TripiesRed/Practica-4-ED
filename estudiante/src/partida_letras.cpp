@@ -27,11 +27,6 @@ int main(int argc, char *argv[]){
 
     int letters_amount = atoi(argv[4]);
 
- /*   if(mode != 'L' || mode != 'P'){
-        cout << "El tercer argumento debe ser L o P" << endl;
-        exit(-1);
-    }
-*/
     ifstream f_diccionario(argv[1]);
 
     if(!f_diccionario){
@@ -72,6 +67,7 @@ int main(int argc, char *argv[]){
     for (int i = 0; i < available.size(); i++){
         cout << available[i] << " ";
     }
+
     cout << endl;
     cout << "SOLUCIONES:" << endl;
     for(int i = 0; i < std::get<0>(solutions).size(); i++){

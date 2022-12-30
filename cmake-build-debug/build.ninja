@@ -224,6 +224,66 @@ build palabras_validas_diccionario: CXX_EXECUTABLE_LINKER__palabras_validas_dicc
   TARGET_FILE = palabras_validas_diccionario
   TARGET_PDB = palabras_validas_diccionario.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target partida_letras_eficiente
+
+
+#############################################
+# Order-only phony target for partida_letras_eficiente
+
+build cmake_object_order_depends_target_partida_letras_eficiente: phony || CMakeFiles/partida_letras_eficiente.dir
+
+build CMakeFiles/partida_letras_eficiente.dir/estudiante/src/partida_letras_eficiente.cpp.o: CXX_COMPILER__partida_letras_eficiente_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/partida_letras_eficiente.cpp || cmake_object_order_depends_target_partida_letras_eficiente
+  DEP_FILE = CMakeFiles/partida_letras_eficiente.dir/estudiante/src/partida_letras_eficiente.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/partida_letras_eficiente.dir
+  OBJECT_FILE_DIR = CMakeFiles/partida_letras_eficiente.dir/estudiante/src
+
+build CMakeFiles/partida_letras_eficiente.dir/estudiante/src/letters_set.cpp.o: CXX_COMPILER__partida_letras_eficiente_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/letters_set.cpp || cmake_object_order_depends_target_partida_letras_eficiente
+  DEP_FILE = CMakeFiles/partida_letras_eficiente.dir/estudiante/src/letters_set.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/partida_letras_eficiente.dir
+  OBJECT_FILE_DIR = CMakeFiles/partida_letras_eficiente.dir/estudiante/src
+
+build CMakeFiles/partida_letras_eficiente.dir/estudiante/src/letters_bag.cpp.o: CXX_COMPILER__partida_letras_eficiente_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/letters_bag.cpp || cmake_object_order_depends_target_partida_letras_eficiente
+  DEP_FILE = CMakeFiles/partida_letras_eficiente.dir/estudiante/src/letters_bag.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/partida_letras_eficiente.dir
+  OBJECT_FILE_DIR = CMakeFiles/partida_letras_eficiente.dir/estudiante/src
+
+build CMakeFiles/partida_letras_eficiente.dir/estudiante/src/solver.cpp.o: CXX_COMPILER__partida_letras_eficiente_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/solver.cpp || cmake_object_order_depends_target_partida_letras_eficiente
+  DEP_FILE = CMakeFiles/partida_letras_eficiente.dir/estudiante/src/solver.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/partida_letras_eficiente.dir
+  OBJECT_FILE_DIR = CMakeFiles/partida_letras_eficiente.dir/estudiante/src
+
+build CMakeFiles/partida_letras_eficiente.dir/estudiante/src/dictionary.cpp.o: CXX_COMPILER__partida_letras_eficiente_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/dictionary.cpp || cmake_object_order_depends_target_partida_letras_eficiente
+  DEP_FILE = CMakeFiles/partida_letras_eficiente.dir/estudiante/src/dictionary.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/partida_letras_eficiente.dir
+  OBJECT_FILE_DIR = CMakeFiles/partida_letras_eficiente.dir/estudiante/src
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target partida_letras_eficiente
+
+
+#############################################
+# Link the executable partida_letras_eficiente
+
+build partida_letras_eficiente: CXX_EXECUTABLE_LINKER__partida_letras_eficiente_Debug CMakeFiles/partida_letras_eficiente.dir/estudiante/src/partida_letras_eficiente.cpp.o CMakeFiles/partida_letras_eficiente.dir/estudiante/src/letters_set.cpp.o CMakeFiles/partida_letras_eficiente.dir/estudiante/src/letters_bag.cpp.o CMakeFiles/partida_letras_eficiente.dir/estudiante/src/solver.cpp.o CMakeFiles/partida_letras_eficiente.dir/estudiante/src/dictionary.cpp.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/partida_letras_eficiente.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = partida_letras_eficiente
+  TARGET_PDB = partida_letras_eficiente.dbg
+
 
 #############################################
 # Utility command for doc_doxygen
@@ -272,7 +332,7 @@ build CMakeFiles/doc_doxygen | ${cmake_ninja_workdir}CMakeFiles/doc_doxygen: CUS
 #############################################
 # Folder: /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug
 
-build all: phony cantidad_letras diccionario partida_letras palabras_validas_diccionario doc_doxygen
+build all: phony cantidad_letras diccionario partida_letras palabras_validas_diccionario partida_letras_eficiente doc_doxygen
 
 # =============================================================================
 # Built-in targets

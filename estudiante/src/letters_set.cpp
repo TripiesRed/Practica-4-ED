@@ -22,7 +22,7 @@ LettersSet::LettersSet(const LettersSet &other) {
 bool LettersSet::insert(const pair<char, LetterInfo> &val) {
     bool correcto = true;
 
-    if (empty() || !find(val.first))
+    if (empty() || letras.count(val.first))
         letras.insert(val);
 
     else correcto = false;
@@ -54,7 +54,7 @@ unsigned int LettersSet::size() const {
 int LettersSet::getScore (string word){
     int tam = word.size(), total=0;
     for(int i=0; i<tam; i++)
-        total += letras[_toupper(word.at(i))].score;
+        total += letras[::toupper(word.at(i))].score;
 
     return total;
 }

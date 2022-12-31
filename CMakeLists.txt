@@ -40,8 +40,8 @@ if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras_eficiente.cpp)
             ${BASE_FOLDER}/src/partida_letras_eficiente.cpp
             ${BASE_FOLDER}/src/letters_set.cpp
             ${BASE_FOLDER}/src/letters_bag.cpp
-            ${BASE_FOLDER}/src/solver.cpp
-            ${BASE_FOLDER}/src/dictionary.cpp estudiante/src/partida_letras_eficiente.cpp)
+            ${BASE_FOLDER}/src/solver_eficiente.cpp
+            ${BASE_FOLDER}/src/dictionary.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras_profesor.cpp)

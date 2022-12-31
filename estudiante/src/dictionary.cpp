@@ -345,6 +345,8 @@ bool Dictionary::possible_words_iterator::disponible(const char c) const {
 Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operator++() {
 
     bool valida = false; //Señal que nos indica cuando hayamos encontrado una palabra válida
+    node fin;
+    bool still_in_same_node = false;
     do{
         //Primera iteración cuando comenzamos en la raíz para evitar que se imprima el primer elemento nulo
         if(this->level==0){
@@ -352,32 +354,50 @@ Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operat
             this->level++;
         }
 
-        if (!this->current_node.is_null()) { //Comprobamos si el nodo actual es nulo
+        if (!this->current_node.is_null() ) { //Comprobamos si el nodo actual es nulo
 
             //Comprobamos si la letra del nodo actual la podemos utilizar
-            if(this->available_letters.count((*this->current_node).character)!=0){
-
+            if(this->available_letters.count((*this->current_node).character)!=0 && !still_in_same_node){
                 //Añadimos la letra a la palabra y la eliminamos de entre las disponibles
                 this->current_word+=(*this->current_node).character;
                 this->available_letters.erase(this->available_letters.find((*this->current_node).character));
+                cout << "ANIADE -> " << this->current_word << endl;
 
                 //En caso de estar en una palabra válida, activamos la señal
                 if((*this->current_node).valid_word) valida = true;
+                for(auto it = this->available_letters.begin(); it!=this->available_letters.end(); ++it)
+                    cout << " " << *it;
+                cout << endl;
 
-                //Si el hijo izquierdo del nodo actual no es nulo nos colocamos en el
+                //Si el hijo izquierdo del nodo actual no es nulo nos colocamos en él
                 if (!this->current_node.left_child().is_null()) {
                     this->current_node = this->current_node.left_child();
                     level++;
+                    cout << "HIJO IZQ" << endl;
                 }
+                else if( (*this->current_node.parent()).character != this->current_word.at(this->current_word.length()-2)){
+                    still_in_same_node=true;
+                    this->available_letters.insert((*this->current_node).character);
+                    this->current_word.pop_back();
+                    valida = false;
+                }
+
             }
 
             //En caso de que no podamos usar el nodo actual, nos colocamos en su hermano derecho (si no es nulo)
             else if (!this->current_node.right_sibling().is_null()){
-                if(this->current_word.at(this->current_word.length()-1) == (*this->current_node).character) {
+                if(this->level != 1 && this->current_word.at(this->current_word.length()-1) == (*this->current_node).character
+                    && this->level == this->current_word.length()) {
                     this->available_letters.insert((*this->current_node).character);
                     this->current_word.pop_back();
+                    cout << "OUT" << endl;
+                    for(auto it = this->available_letters.begin(); it!=this->available_letters.end(); ++it)
+                        cout << " " << *it;
+                    cout << endl;
                 }
+                cout << "HERM DER" << endl;
                 this->current_node = this->current_node.right_sibling();
+                if(still_in_same_node) still_in_same_node=false;
             }
 
             //En caso de que no podamos usar el nodo actual y no tenga hermano derecho
@@ -386,9 +406,9 @@ Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operat
                 //vuelto a la raíz
                 while (!this->current_node.parent().is_null() &&
                        (this->current_node.right_sibling().is_null() || this->current_node.right_sibling() == this->current_node)){
-
                     //Devolvemos las letras utilizadas al conjunto de letras disponibles a medida que subimos
-                    if(this->current_word.at(this->current_word.length()-1) == (*this->current_node).character) {
+                    if(this->level != 1 && this->current_word.at(this->current_word.length()-1) == (*this->current_node).character
+                       && this->level == this->current_word.length()) {
                         this->available_letters.insert((*this->current_node).character);
                         this->current_word.pop_back();
                     }
@@ -396,16 +416,19 @@ Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operat
                     //Subimos de nivel y nodo
                     this->current_node = this->current_node.parent();
                     this->level--;
+                    cout << "BORRA ->" << this->current_word << endl;
                 }
 
                 //Si el nodo actual es la raíz, entonces hemos terminado luego el nodo actual pasa ser vacío
                 if (this->current_node.parent().is_null()){
-                    this->current_node = node();
+                    this->current_node = fin;
+                    cout << "FIN" << endl;
                 }
 
                 //Si el nodo actual tiene un hermano derecho no nulo, devolvemos la letra del nodo actual al conjunto
                 // y nos posicionamos en su hermano derecho
                 else {
+                    cout << "HERM DER + BORRA " << this->current_word << endl;
                     this->available_letters.insert((*this->current_node).character);
                     this->current_word.pop_back();
                     this->current_node = this->current_node.right_sibling();
@@ -414,9 +437,10 @@ Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operat
         }
 
         //En caso de haber vuelto a la raíz, terminamos
-        if(this->level == 0) return *this;
+        if(this->current_node == fin) return *this;
 
-    }while(!valida); //Repetir hasta encontrar una palabra válida
+    }while(!valida || still_in_same_node); //Repetir hasta encontrar una palabra válida
+
 
     return *this;
 }

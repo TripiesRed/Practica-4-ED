@@ -1,50 +1,35 @@
 //
-// Created by diegoos_03 on 28/12/22.
+// Created by gonzalomp on 30/12/22.
 //
+
+#include "solver_eficiente.h"
 #include <string>
 #include <vector>
-#include <algorithm>
-#include "solver.h"
 #include <letters_set.h>
 
-// Esritorio
+
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 //                              Private functions                            //
 ///////////////////////////////////////////////////////////////////////////////
 
-bool Solver::DoIHaveTheLettersINeed (const string word, const vector<char> &available_letters){
-    vector<char> copy_available = available_letters;
-    bool letters_ok = true;
+pair<vector<string>, int> SolverEficiente::getSolutionsLength(const vector<char> &available_letters) {
 
-    for(int i = 0; i < word.length() && letters_ok; i++){
-        vector<char>::iterator vt;
-        vt = find (copy_available.begin(), copy_available.end(), word.at(i));
-        if(vt == copy_available.end()){
-            vt = find (copy_available.begin(), copy_available.end(), ::toupper(word.at(i)));
-        }
+    vector<string> list, sols;
+    int punt;
+    vector <char> available_characters;
+    for (int i = 0; i < available_letters.size(); ++i) {
+        available_characters.push_back(std::tolower(available_letters[i]));
+    }
+    cout << "HOLA" << endl;
 
-        if(vt != copy_available.end()) {
-            copy_available.erase(vt);
-        }
-        else{
-            letters_ok = false;
-        }
+    for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
+        it != dictionary.possible_words_end(); ++it){
+        list.push_back(*it);
+        cout << *it << endl;
     }
 
-    return letters_ok;
-}
-
-pair<vector<string>, int> Solver::getSolutionsLength(const vector<char> &available_letters) {
-
-    vector<string> list;
-
-    for(Dictionary::iterator it = dictionary.begin(); it != dictionary.end(); ++it){
-        if(dictionary.exists(*it) && DoIHaveTheLettersINeed((*it), available_letters)){
-                list.push_back(*it);
-        }
-    }
     if(!list.empty()) {
         string max = list[0];
         vector<string> sols;
@@ -72,14 +57,19 @@ pair<vector<string>, int> Solver::getSolutionsLength(const vector<char> &availab
     }
 }
 
-pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available_letters) {
+pair<vector<string>, int> SolverEficiente::getSolutionsPunt(const vector<char> &available_letters) {
 
     vector<string> list;
+    vector <char> available_characters;
+    for (int i = 0; i < available_letters.size(); ++i) {
+        available_characters.push_back(std::tolower(available_letters[i]));
+    }
 
-    for(Dictionary::iterator it = dictionary.begin(); it != dictionary.end(); ++it){
-        if(dictionary.exists(*it) && DoIHaveTheLettersINeed((*it), available_letters)){
-            list.push_back(*it);
-        }
+    for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
+        it != dictionary.possible_words_end(); ++it){
+        list.push_back(*it);
+        cout << "WORD= " << *it << endl;
+
     }
 
     string max = list[0];
@@ -89,6 +79,8 @@ pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available
             max = list[i];
         }
     }
+
+    cout << "WORD_MAX_PUNT: " << max << " P= " << info.getScore(max) << endl;
 
     for(int i = 0; i<= list.size(); i++){
         if(info.getScore(max) == info.getScore(list[i])){
@@ -107,18 +99,15 @@ pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available
 //                              Public functions                             //
 ///////////////////////////////////////////////////////////////////////////////
 
-Solver::Solver(const Dictionary &dict, const LettersSet &letters_set) {
+SolverEficiente::SolverEficiente(const Dictionary &dict, const LettersSet &letters_set) {
     dictionary = dict;
     info = letters_set;
 
 }
 
-pair<vector<string>, int> Solver::getSolutions(const vector<char> & available_letters, bool score_game){
+pair<vector<string>, int> SolverEficiente::getSolutions(const vector<char> & available_letters, bool score_game){
 
-    if(score_game){
-        return getSolutionsPunt(available_letters);
-    }
-    else{
-        return getSolutionsLength(available_letters);
-    }
+    if(score_game) return getSolutionsPunt(available_letters);
+
+    else return getSolutionsLength(available_letters);
 }

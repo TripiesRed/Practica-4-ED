@@ -54,7 +54,7 @@ unsigned int LettersSet::size() const {
 int LettersSet::getScore (string word){
     int tam = word.size(), total=0;
     for(int i=0; i<tam; i++)
-        total += letras[::toupper(word.at(i))].score;
+        total += letras[_toupper(word.at(i))].score;
 
     return total;
 }

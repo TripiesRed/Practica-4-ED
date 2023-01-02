@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include <letters_set.h>
+#include <dictionary.h>
+#include "letters_bag.h"
 
 
 using namespace std;
@@ -22,12 +24,10 @@ pair<vector<string>, int> SolverEficiente::getSolutionsLength(const vector<char>
     for (int i = 0; i < available_letters.size(); ++i) {
         available_characters.push_back(std::tolower(available_letters[i]));
     }
-    cout << "HOLA" << endl;
 
     for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
         it != dictionary.possible_words_end(); ++it){
         list.push_back(*it);
-        cout << *it << endl;
     }
 
     if(!list.empty()) {
@@ -68,7 +68,6 @@ pair<vector<string>, int> SolverEficiente::getSolutionsPunt(const vector<char> &
     for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
         it != dictionary.possible_words_end(); ++it){
         list.push_back(*it);
-        cout << "WORD= " << *it << endl;
 
     }
 
@@ -79,8 +78,6 @@ pair<vector<string>, int> SolverEficiente::getSolutionsPunt(const vector<char> &
             max = list[i];
         }
     }
-
-    cout << "WORD_MAX_PUNT: " << max << " P= " << info.getScore(max) << endl;
 
     for(int i = 0; i<= list.size(); i++){
         if(info.getScore(max) == info.getScore(list[i])){

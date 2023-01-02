@@ -61,3 +61,10 @@
 411	465	1672508472221532038	palabras_validas_diccionario	d3fffb8a952daf8
 1	388	1672508501878518666	CMakeFiles/partida_letras_eficiente.dir/estudiante/src/dictionary.cpp.o	7e4f250d01fb1f04
 388	446	1672508501938542154	partida_letras_eficiente	889c5b0b0a003031
+0	398	1672656175428910971	CMakeFiles/partida_letras_eficiente.dir/estudiante/src/dictionary.cpp.o	7e4f250d01fb1f04
+0	398	1672656175428910971	CMakeFiles/partida_letras_eficiente.dir/estudiante/src/solver_eficiente.cpp.o	fecd69bef1babcb0
+398	460	1672656175489347407	partida_letras_eficiente	889c5b0b0a003031
+1	342	1672656230833666862	CMakeFiles/partida_letras_eficiente.dir/estudiante/src/solver_eficiente.cpp.o	fecd69bef1babcb0
+342	398	1672656230893674710	partida_letras_eficiente	889c5b0b0a003031
+1	339	1672656387732656095	CMakeFiles/partida_letras_eficiente.dir/estudiante/src/solver_eficiente.cpp.o	fecd69bef1babcb0
+339	392	1672656387784671387	partida_letras_eficiente	889c5b0b0a003031

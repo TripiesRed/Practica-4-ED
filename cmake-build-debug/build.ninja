@@ -284,6 +284,73 @@ build partida_letras_eficiente: CXX_EXECUTABLE_LINKER__partida_letras_eficiente_
   TARGET_FILE = partida_letras_eficiente
   TARGET_PDB = partida_letras_eficiente.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target analisis_eficiencia
+
+
+#############################################
+# Order-only phony target for analisis_eficiencia
+
+build cmake_object_order_depends_target_analisis_eficiencia: phony || CMakeFiles/analisis_eficiencia.dir
+
+build CMakeFiles/analisis_eficiencia.dir/estudiante/src/analisis_eficiencia.cpp.o: CXX_COMPILER__analisis_eficiencia_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/analisis_eficiencia.cpp || cmake_object_order_depends_target_analisis_eficiencia
+  DEP_FILE = CMakeFiles/analisis_eficiencia.dir/estudiante/src/analisis_eficiencia.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  OBJECT_FILE_DIR = CMakeFiles/analisis_eficiencia.dir/estudiante/src
+
+build CMakeFiles/analisis_eficiencia.dir/estudiante/src/letters_set.cpp.o: CXX_COMPILER__analisis_eficiencia_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/letters_set.cpp || cmake_object_order_depends_target_analisis_eficiencia
+  DEP_FILE = CMakeFiles/analisis_eficiencia.dir/estudiante/src/letters_set.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  OBJECT_FILE_DIR = CMakeFiles/analisis_eficiencia.dir/estudiante/src
+
+build CMakeFiles/analisis_eficiencia.dir/estudiante/src/letters_bag.cpp.o: CXX_COMPILER__analisis_eficiencia_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/letters_bag.cpp || cmake_object_order_depends_target_analisis_eficiencia
+  DEP_FILE = CMakeFiles/analisis_eficiencia.dir/estudiante/src/letters_bag.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  OBJECT_FILE_DIR = CMakeFiles/analisis_eficiencia.dir/estudiante/src
+
+build CMakeFiles/analisis_eficiencia.dir/estudiante/src/solver.cpp.o: CXX_COMPILER__analisis_eficiencia_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/solver.cpp || cmake_object_order_depends_target_analisis_eficiencia
+  DEP_FILE = CMakeFiles/analisis_eficiencia.dir/estudiante/src/solver.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  OBJECT_FILE_DIR = CMakeFiles/analisis_eficiencia.dir/estudiante/src
+
+build CMakeFiles/analisis_eficiencia.dir/estudiante/src/solver_eficiente.cpp.o: CXX_COMPILER__analisis_eficiencia_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/solver_eficiente.cpp || cmake_object_order_depends_target_analisis_eficiencia
+  DEP_FILE = CMakeFiles/analisis_eficiencia.dir/estudiante/src/solver_eficiente.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  OBJECT_FILE_DIR = CMakeFiles/analisis_eficiencia.dir/estudiante/src
+
+build CMakeFiles/analisis_eficiencia.dir/estudiante/src/dictionary.cpp.o: CXX_COMPILER__analisis_eficiencia_Debug /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/src/dictionary.cpp || cmake_object_order_depends_target_analisis_eficiencia
+  DEP_FILE = CMakeFiles/analisis_eficiencia.dir/estudiante/src/dictionary.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I/home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/estudiante/include
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  OBJECT_FILE_DIR = CMakeFiles/analisis_eficiencia.dir/estudiante/src
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target analisis_eficiencia
+
+
+#############################################
+# Link the executable analisis_eficiencia
+
+build analisis_eficiencia: CXX_EXECUTABLE_LINKER__analisis_eficiencia_Debug CMakeFiles/analisis_eficiencia.dir/estudiante/src/analisis_eficiencia.cpp.o CMakeFiles/analisis_eficiencia.dir/estudiante/src/letters_set.cpp.o CMakeFiles/analisis_eficiencia.dir/estudiante/src/letters_bag.cpp.o CMakeFiles/analisis_eficiencia.dir/estudiante/src/solver.cpp.o CMakeFiles/analisis_eficiencia.dir/estudiante/src/solver_eficiente.cpp.o CMakeFiles/analisis_eficiencia.dir/estudiante/src/dictionary.cpp.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/analisis_eficiencia.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = analisis_eficiencia
+  TARGET_PDB = analisis_eficiencia.dbg
+
 
 #############################################
 # Utility command for doc_doxygen
@@ -332,7 +399,7 @@ build CMakeFiles/doc_doxygen | ${cmake_ninja_workdir}CMakeFiles/doc_doxygen: CUS
 #############################################
 # Folder: /home/gonzalomp/Escritorio/EstructuraDatos/ej04_juego_letras/cmake-build-debug
 
-build all: phony cantidad_letras diccionario partida_letras palabras_validas_diccionario partida_letras_eficiente doc_doxygen
+build all: phony cantidad_letras diccionario partida_letras palabras_validas_diccionario partida_letras_eficiente analisis_eficiencia doc_doxygen
 
 # =============================================================================
 # Built-in targets

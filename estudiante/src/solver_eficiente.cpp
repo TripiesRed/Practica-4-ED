@@ -70,24 +70,32 @@ pair<vector<string>, int> SolverEficiente::getSolutionsPunt(const vector<char> &
         list.push_back(*it);
 
     }
-
-    string max = list[0];
-    vector<string> sols;
-    for(int i = 1; i <= list.size(); i++){
-        if(info.getScore(max) < info.getScore(list[i])){
-            max = list[i];
+    if(!list.empty()) {
+        string max = list[0];
+        vector<string> sols;
+        for (int i = 1; i < list.size(); i++) {
+            if (info.getScore(max) < info.getScore(list[i])) {
+                max = list[i];
+            }
         }
+
+        for (int i = 0; i < list.size(); i++) {
+            if (info.getScore(max) == info.getScore(list[i])) {
+                sols.push_back(list[i]);
+            }
+        }
+
+        std::pair<vector<string>, int> result(sols, info.getScore(max));
+        return result;
     }
 
-    for(int i = 0; i<= list.size(); i++){
-        if(info.getScore(max) == info.getScore(list[i])){
-            sols.push_back(list[i]);
-        }
+    else{
+        vector<string> sols;
+        sols.clear();
+        int punt = 0;
+        std::pair<vector<string>, int> result(sols, punt);
+        return result;
     }
-
-    std::pair<vector<string>, int> result (sols, info.getScore(max));
-    return result;
-
 }
 
 

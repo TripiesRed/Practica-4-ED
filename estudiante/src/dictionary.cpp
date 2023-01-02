@@ -373,11 +373,23 @@ Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operat
                 }
                 //Comprobamos si hemos repetido en el mismo nodo. En caso de ser así, corrige la palabra y busca
                 // el siguiente nodo que corresponde
-                else if( (*this->current_node.parent()).character != this->current_word.at(this->current_word.length()-2)){
-                    still_in_same_node=true;
-                    this->available_letters.insert((*this->current_node).character);
-                    this->current_word.pop_back();
-                    valida = false;
+                else if(this->current_word.length()>3){
+                    if((*this->current_node.parent().parent()).character != this->current_word.at(this->current_word.length()-3)
+                        || (*this->current_node.parent()).character != this->current_word.at(this->current_word.length()-2)) {
+                        still_in_same_node = true;
+                        this->available_letters.insert((*this->current_node).character);
+                        this->current_word.pop_back();
+                        valida = false;
+                    }
+                }
+
+                else if(this->current_word.length()>2){
+                    if ((*this->current_node.parent()).character != this->current_word.at(this->current_word.length()-2)){
+                        still_in_same_node = true;
+                        this->available_letters.insert((*this->current_node).character);
+                        this->current_word.pop_back();
+                        valida = false;
+                    }
                 }
 
             }
@@ -436,7 +448,6 @@ Dictionary::possible_words_iterator &Dictionary::possible_words_iterator::operat
         if(this->current_node == fin) return *this;
 
     }while(!valida || still_in_same_node); //Repetir hasta encontrar una palabra válida
-
 
     return *this;
 }

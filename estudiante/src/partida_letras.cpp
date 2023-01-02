@@ -73,5 +73,8 @@ int main(int argc, char *argv[]){
     cout << "PUNTUACION:" << endl;
     cout << std::get<1>(solutions) << endl;
 
+    f_diccionario.close();
+    f_letras.close();
+
     return 0;
 }

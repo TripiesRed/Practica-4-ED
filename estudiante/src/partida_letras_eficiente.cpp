@@ -59,7 +59,6 @@ int main(int argc, char *argv[]){
     }
 
     // SALIDA
-
     cout << "LETRAS DISPONIBLES:" << endl;
     for (int i = 0; i < available.size(); i++){
         cout << available[i] << " ";
@@ -72,6 +71,9 @@ int main(int argc, char *argv[]){
     }
     cout << "PUNTUACION:" << endl;
     cout << std::get<1>(solutions) << endl;
+
+    f_diccionario.close();
+    f_letras.close();
 
     return 0;
 }

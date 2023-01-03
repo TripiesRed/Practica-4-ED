@@ -5,7 +5,7 @@
 #include "dictionary.h"
 #include "letters_set.h"
 #include "letters_bag.h"
-#include "solver_eficiente.h"
+#include "solver.h"
 
 using namespace std;
 
@@ -47,15 +47,15 @@ int main(int argc, char *argv[]){
     LettersBag bag(letras);
     vector <char> available = bag.extractLetters(letters_amount);
 
-    SolverEficiente solver(diccionario, letras);
+    Solver solver(diccionario, letras);
 
     pair<vector<string>, int> solutions;
 
     if(mode == 'P'){
-        solutions = solver.getSolutions(available, true);
+        solutions = solver.getSolutionsEfficient(available, true);
     }
     else{
-        solutions = solver.getSolutions(available, false);
+        solutions = solver.getSolutionsEfficient(available, false);
     }
 
     // SALIDA

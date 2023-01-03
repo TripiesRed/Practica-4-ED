@@ -9,7 +9,6 @@
 #include "dictionary.h"
 #include "letters_set.h"
 #include "letters_bag.h"
-#include "solver_eficiente.h"
 #include "solver.h"
 
 using namespace std;

@@ -25,11 +25,17 @@ private:
 
     pair<vector<string>, int> getSolutionsPunt( const vector<char> & available_letters);
 
+    pair<vector<string>, int> getSolutionsLengthEfficient( const vector<char> & available_letters);
+
+    pair<vector<string>, int> getSolutionsPuntEfficient( const vector<char> & available_letters);
+
 public:
 
     Solver (const Dictionary & dict, const LettersSet & letters_set);
 
     pair<vector<string>, int> getSolutions( const vector<char> & available_letters, bool score_game);
+
+    pair<vector<string>, int> getSolutionsEfficient( const vector<char> & available_letters, bool score_game);
 };
 
 

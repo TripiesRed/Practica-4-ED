@@ -110,6 +110,88 @@ pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available
     }
 }
 
+pair<vector<string>, int> Solver::getSolutionsLengthEfficient(const vector<char> &available_letters) {
+
+    vector<string> list, sols;
+    int punt;
+    vector <char> available_characters;
+    for (int i = 0; i < available_letters.size(); ++i) {
+        available_characters.push_back(std::tolower(available_letters[i]));
+    }
+
+    for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
+        it != dictionary.possible_words_end(); ++it){
+        list.push_back(*it);
+    }
+
+    if(!list.empty()) {
+        string max = list[0];
+        vector<string> sols;
+        for (int i = 1; i <= list.size(); i++) {
+            if (max.length() < list[i].length()) {
+                max = list[i];
+            }
+        }
+
+        for (int i = 0; i <= list.size(); i++) {
+            if (max.length() == list[i].length()) {
+                sols.push_back(list[i]);
+            }
+        }
+
+        std::pair<vector<string>, int> result(sols, max.length());
+        return result;
+    }
+    else{
+        vector<string> sols;
+        sols.clear();
+        int punt = 0;
+        std::pair<vector<string>, int> result(sols, punt);
+        return result;
+    }
+}
+
+pair<vector<string>, int> Solver::getSolutionsPuntEfficient(const vector<char> &available_letters) {
+
+    vector<string> list;
+    vector <char> available_characters;
+    for (int i = 0; i < available_letters.size(); ++i) {
+        available_characters.push_back(std::tolower(available_letters[i]));
+    }
+
+    for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
+        it != dictionary.possible_words_end(); ++it){
+        list.push_back(*it);
+
+    }
+    if(!list.empty()) {
+        string max = list[0];
+        vector<string> sols;
+        for (int i = 1; i < list.size(); i++) {
+            if (info.getScore(max) < info.getScore(list[i])) {
+                max = list[i];
+            }
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            if (info.getScore(max) == info.getScore(list[i])) {
+                sols.push_back(list[i]);
+            }
+        }
+
+        std::pair<vector<string>, int> result(sols, info.getScore(max));
+        return result;
+    }
+
+    else{
+        vector<string> sols;
+        sols.clear();
+        int punt = 0;
+        std::pair<vector<string>, int> result(sols, punt);
+        return result;
+    }
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -129,5 +211,15 @@ pair<vector<string>, int> Solver::getSolutions(const vector<char> & available_le
     }
     else{
         return getSolutionsLength(available_letters);
+    }
+}
+
+pair<vector<string>, int> Solver::getSolutionsEfficient(const vector<char> & available_letters, bool score_game){
+
+    if(score_game){
+        return getSolutionsPuntEfficient(available_letters);
+    }
+    else{
+        return getSolutionsLengthEfficient(available_letters);
     }
 }

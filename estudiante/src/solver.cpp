@@ -22,7 +22,7 @@ bool Solver::DoIHaveTheLettersINeed (const string word, const vector<char> &avai
         vector<char>::iterator vt;
         vt = find (copy_available.begin(), copy_available.end(), word.at(i));
         if(vt == copy_available.end()){
-            vt = find (copy_available.begin(), copy_available.end(), ::toupper(word.at(i)));
+            vt = find (copy_available.begin(), copy_available.end(), toupper(word.at(i)));
         }
 
         if(vt != copy_available.end()) {
@@ -48,26 +48,26 @@ pair<vector<string>, int> Solver::getSolutionsLength(const vector<char> &availab
     if(!list.empty()) {
         string max = list[0];
         vector<string> sols;
-        for (int i = 1; i <= list.size(); i++) {
+        for (int i = 1; i < list.size(); i++) {
             if (max.length() < list[i].length()) {
                 max = list[i];
             }
         }
 
-        for (int i = 0; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (max.length() == list[i].length()) {
                 sols.push_back(list[i]);
             }
         }
 
-        std::pair<vector<string>, int> result(sols, max.length());
+        pair<vector<string>, int> result(sols, max.length());
         return result;
     }
     else{
         vector<string> sols;
         sols.clear();
         int punt = 0;
-        std::pair<vector<string>, int> result(sols, punt);
+        pair<vector<string>, int> result(sols, punt);
         return result;
     }
 }
@@ -97,7 +97,7 @@ pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available
             }
         }
 
-        std::pair<vector<string>, int> result(sols, info.getScore(max));
+        pair<vector<string>, int> result(sols, info.getScore(max));
         return result;
     }
 
@@ -105,7 +105,7 @@ pair<vector<string>, int> Solver::getSolutionsPunt(const vector<char> &available
         vector<string> sols;
         sols.clear();
         int punt = 0;
-        std::pair<vector<string>, int> result(sols, punt);
+        pair<vector<string>, int> result(sols, punt);
         return result;
     }
 }
@@ -127,26 +127,26 @@ pair<vector<string>, int> Solver::getSolutionsLengthEfficient(const vector<char>
     if(!list.empty()) {
         string max = list[0];
         vector<string> sols;
-        for (int i = 1; i <= list.size(); i++) {
+        for (int i = 1; i < list.size(); i++) {
             if (max.length() < list[i].length()) {
                 max = list[i];
             }
         }
 
-        for (int i = 0; i <= list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             if (max.length() == list[i].length()) {
                 sols.push_back(list[i]);
             }
         }
 
-        std::pair<vector<string>, int> result(sols, max.length());
+        pair<vector<string>, int> result(sols, max.length());
         return result;
     }
     else{
         vector<string> sols;
         sols.clear();
         int punt = 0;
-        std::pair<vector<string>, int> result(sols, punt);
+        pair<vector<string>, int> result(sols, punt);
         return result;
     }
 }
@@ -156,7 +156,7 @@ pair<vector<string>, int> Solver::getSolutionsPuntEfficient(const vector<char> &
     vector<string> list;
     vector <char> available_characters;
     for (int i = 0; i < available_letters.size(); ++i) {
-        available_characters.push_back(std::tolower(available_letters[i]));
+        available_characters.push_back(tolower(available_letters[i]));
     }
 
     for(Dictionary::possible_words_iterator it = dictionary.possible_words_begin(available_characters);
@@ -179,7 +179,7 @@ pair<vector<string>, int> Solver::getSolutionsPuntEfficient(const vector<char> &
             }
         }
 
-        std::pair<vector<string>, int> result(sols, info.getScore(max));
+        pair<vector<string>, int> result(sols, info.getScore(max));
         return result;
     }
 
@@ -187,7 +187,7 @@ pair<vector<string>, int> Solver::getSolutionsPuntEfficient(const vector<char> &
         vector<string> sols;
         sols.clear();
         int punt = 0;
-        std::pair<vector<string>, int> result(sols, punt);
+        pair<vector<string>, int> result(sols, punt);
         return result;
     }
 }

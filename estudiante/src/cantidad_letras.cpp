@@ -43,14 +43,14 @@ int main(int argc, char *argv[])
     int ocurrences;
 
 
-    cout << "Letra Usos Ocurencias" << endl;
+    cout << "Letra" << "\t" << "Usos" << "\t" << "Ocurrencias" << endl;
 
     for(char c = 'A'; c <= 'Z'; c++){
         usages =  diccionario.getTotalUsages(c) + diccionario.getTotalUsages(tolower(c));
         ocurrences = diccionario.getOccurrences(c) + diccionario.getOccurrences(tolower(c));
 
         if(ocurrences != 0){
-            cout << c << " " << usages << " " << ocurrences << endl;
+            cout << c << "\t" << usages << "\t" << ocurrences << endl;
         }
     }
 

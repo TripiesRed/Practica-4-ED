@@ -84,8 +84,21 @@ private:
      */
     node insertCharacter(char character, node current);
 
+    /**
+     * @brief Calcula el número de ocurrencias a partir de un nodo del carácter que se pasa como argumento en el árbol de forma recursiva.
+     * @param c Carácter del que se calcula las ocurrencias.
+     * @param current Nodo a partir del cual se calculan las ocurrencias.
+     * @return Número de ocurrencias del caracter.
+     */
     int getOccurrences(node curr_node, char c);
 
+    /**
+     * @brief Calcula el número de usos a partir de un nodo del carácter que se pasa como argumento en el árbol de forma recursiva.
+     * @param c Carácter del que se calcula los usos.
+     * @param current Nodo a partir del cual se calculan los usos.
+     * @return Pareja compuesta por el número de ocurrencias del carácter en los nodos que cuelgan del nodo actual,
+     * y el número de palabras que terminan por debajo del nodo actual.
+     */
     std::pair<int, int> getTotalUsages(node curr_node, char c);
 
 public:
@@ -191,8 +204,18 @@ public:
 
     //////////////////////////////////////////////// Recursive functions ///////////////////////////////////////////////
 
+    /**
+     * @brief Calcula el número de ocurrencias del carácter que se pasa como argumento en el árbol de forma recursiva.
+     * @param c Carácter del que se calcula las ocurrencias.
+     * @return Número de ocurrencias del caracter.
+     */
     int getOccurrences(const char c);
 
+    /**
+     * @brief Calcula el número de usos del carácter que se pasa como argumento en el árbol de forma recursiva.
+     * @param c Carácter del que se calcula los usos.
+     * @return Número de usos del caracter.
+     */
     int getTotalUsages(const char c);
 
     ///////////////////////////////////////////////////// Iterator ////////////////////////////////////////////////////
@@ -203,23 +226,55 @@ public:
         tree<char_info>::const_preorder_iterator iter;
 
     public:
-
+        /**
+         * @brief Constructor por defecto.
+         */
         iterator();
 
+        /**
+         * @brief Constructor de copia
+         * @param iter Iterador que se copia.
+         */
         iterator(tree<char_info>::const_preorder_iterator iter);
 
+        /**
+         * @brief Obtiene el contenido del iterador.
+         * @return Devuelve la palabra sobre la que se posiciona el iterador.
+         */
         std::string operator*();
 
+        /**
+         * @brief Avanza hacia el siguiente iterador.
+         * @return Devuelve el siguiente iterador.
+         */
         iterator &operator++();
 
+        /**
+         * @brief Comprueba si los iteradores son iguales.
+         * @param other El iterador con el que se compara.
+         * @return true si son iguales, false en caso contrario.
+         */
         bool operator==(const iterator &other) const;
 
+        /**
+         * @brief Comprueba si los iteradores son iguales.
+         * @param other El iterador con el que se compara.
+         * @return false si son iguales, true en caso contrario.
+         */
         bool operator!=(const iterator &other) const;
 
     };
 
+    /**
+     * @brief Iterador a la primera palabra del diccionario.
+     * @return Devuelve un iterador a la primera palabra del diccionario.
+     */
     iterator begin() const;
 
+    /**
+     * @brief Apunta a la siguiente de la última palabra del diccionario.
+     * @return Devuelve un iterador que apunta a la siguiente de la última palabra del diccionario.
+     */
     iterator end() const;
 
     ///////////////////////////////////////////////// Letters Iterator /////////////////////////////////////////////////

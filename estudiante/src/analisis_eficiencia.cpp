@@ -46,7 +46,7 @@ void experiment_solverEficiente(int n, int repetitions, Dictionary dictionary, L
     // Inicializamos el experimento antes del bucle de conteo de tiempo para no afectar al análisis
     LettersBag prueba (lettersSet);
     vector<char> available_letters= prueba.extractLetters(n);
-    SolverEficiente solverEficiente(dictionary,lettersSet);
+    Solver solverEficiente(dictionary,lettersSet);
 
     //PARTE 1 - SOLVER
     // Medimos el tiempo antes de iniciar el expermiento

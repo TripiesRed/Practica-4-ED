@@ -8,25 +8,25 @@ set(BASE_FOLDER estudiante)
 include_directories(${BASE_FOLDER}/include)
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/cantidad_letras.cpp)
-  add_executable(cantidad_letras
-    ${BASE_FOLDER}/src/cantidad_letras.cpp
-    ${BASE_FOLDER}/src/dictionary.cpp
-    ${BASE_FOLDER}/src/letters_set.cpp estudiante/include/letters_set.h estudiante/src/cantidad_letras.cpp)
+    add_executable(cantidad_letras
+            ${BASE_FOLDER}/src/cantidad_letras.cpp
+            ${BASE_FOLDER}/src/dictionary.cpp
+            ${BASE_FOLDER}/src/letters_set.cpp estudiante/include/letters_set.h estudiante/src/cantidad_letras.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/diccionario.cpp)
-  add_executable(diccionario
-    ${BASE_FOLDER}/src/diccionario.cpp
-    ${BASE_FOLDER}/src/dictionary.cpp)
+    add_executable(diccionario
+            ${BASE_FOLDER}/src/diccionario.cpp
+            ${BASE_FOLDER}/src/dictionary.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras.cpp)
-  add_executable(partida_letras
-    ${BASE_FOLDER}/src/partida_letras.cpp
-    ${BASE_FOLDER}/src/letters_set.cpp
-    ${BASE_FOLDER}/src/letters_bag.cpp
-    ${BASE_FOLDER}/src/solver.cpp
-    ${BASE_FOLDER}/src/dictionary.cpp )
+    add_executable(partida_letras
+            ${BASE_FOLDER}/src/partida_letras.cpp
+            ${BASE_FOLDER}/src/letters_set.cpp
+            ${BASE_FOLDER}/src/letters_bag.cpp
+            ${BASE_FOLDER}/src/solver.cpp
+            ${BASE_FOLDER}/src/dictionary.cpp )
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/palabras_validas_diccionario.cpp)
@@ -55,12 +55,12 @@ if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/analisis_eficiencia.cpp)
 endif()
 
 if (EXISTS ${CMAKE_SOURCE_DIR}/${BASE_FOLDER}/src/partida_letras_profesor.cpp)
-  add_executable(partida_letras_profesor
-    ${BASE_FOLDER}/src/partida_letras_profesor.cpp
-    ${BASE_FOLDER}/src/letters_set.cpp
-    ${BASE_FOLDER}/src/letters_bag.cpp
-    ${BASE_FOLDER}/src/solver_eficiente.cpp
-    ${BASE_FOLDER}/src/dictionary.cpp)
+    add_executable(partida_letras_profesor
+            ${BASE_FOLDER}/src/partida_letras_profesor.cpp
+            ${BASE_FOLDER}/src/letters_set.cpp
+            ${BASE_FOLDER}/src/letters_bag.cpp
+            ${BASE_FOLDER}/src/solver_eficiente.cpp
+            ${BASE_FOLDER}/src/dictionary.cpp)
 endif()
 
 # check if Doxygen is installed

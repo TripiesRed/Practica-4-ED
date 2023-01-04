@@ -1,11 +1,249 @@
-/*! \mainpage Título de la página principal
+/*! \mainpage Práctica 4: El juego de las letras
 
 # Introducción
 
-A RELLENAR POR EL ESTUDIANTE
+En la presente práctica se pretende implementar tanto el **juego de las letras**, descrito a continuación, como un algoritmo que
+nos ofrezca todas las soluciones del mismo.
 
+El objetivo es formar la mejor palabra posible (dependiendo de uno de los dos criterios que
+explicamos a continuación) a partir de un conjunto de letras extraídas al azar de una bolsa.
+
+Existen dos modalidades de juego:
+- Juego a longitud: En este modo de juego se tiene en cuenta sólo la longitud de las palabras,
+  y gana la palabra más larga encontrada.
+- Juego a puntos: En este modo de juego a cada letra se le asigna una puntuación, y la
+  puntuación de la palabra será igual a la suma de las puntuaciones de las letras que la
+  componen.
+
+---
+### Puntos y cantidad de letras
+
+Como se ha mencionado previamente, para jugar a puntuación, se deben asignar valoraciones a cada letra susceptible de aparecer en el juego.
+Es más, a fin de no obtener grandees cantidades de letras poco frecuentes, también se le asocia a cada letra el número de veces que va a ser incluida en la bolsa.
+De este modo, las letras con un número mayor tendrán más posibilidades de aparecer en una partida.
+
+De esta idea surge el TDA LettersSet, en el que implementamos estas propiedades que resultan imprescindibles.
+
+---
+### Letras de una partida
+
+Presentamos ahora el contenedor template Bag, un almacén de datos dotado de algunas funciones que encajan con la naturaleza del juego de las letras.
+Nace así el TDA LettersBag, que no es más que una especificación de contenedor genérico Bag a caracteres. Pone a nuestra disposición una serie de métodos
+que nos facilitan las posteriores operaciones, siendo la extracción aleatoria de letras el ejemplo más idóneo.
+
+---
+### Validez de las soluciones
+
+Todo juego carece de sentido si no se dispone de un reglamento que regule las jugadas del mismo. Nuestro **juego de las letras**
+no es una excepción. Con el fin de establecer la validez de cada solución, recogemos en el TDA Diccionary las soluciones permitidas en una partida.
+
+Dejamos atrás las implentaciones sobre una interminable lista de palabras, donde destacaban la ineficiencia y la basicidad. En cambio, nuestro moderno TDA Dictionary
+se sustentará sobre el contenedor tree, de manera que se aprovechan elegantemente las propiedades de las palabras.
+
+---
+### Resolución del juego
+
+Dejamos para el final la *guinda del pastel*, que no podría ser otra que el TDA Solver. En él se desarrolla no uno, sino **dos** algoritmos que solucionan
+una partida. En el primero se hace una primera aproximación, mientras que en el segundo se implementa de forma más eficiente, evitando las ramas del árbol que no nos interesa.
+
+---
 # Ejecutables
 
-A RELLENAR POR EL ESTUDIANTE
+Con ánimo de poner de manifiesto las estructuras e implementaciones anteriores, creamos una serie **programas ejecutables** cuyo funcionamiento iremos exponiendo caso por caso.
+
+---
+### Diccionario.cpp
+El funcionamiento de este archivo es sencillo. Primero, se carga el contenido del archivo que se pasa como argumento en un diccionario con
+estructura de árbol. Se recorre el diccionario creado con un iterador, y se imprimen por pantalla todas sus palabras.
+Si el iterador anterior está correctamente implementado, el programa deberá funcionar con normalidad.
+
+Pasando como argumento **data/diccionario_mini.txt**, obtenemos como salida:
+
+a
+
+ama
+
+amar
+
+amo
+
+amor
+
+cal
+
+col
+
+coz
+
+
+---
+### Cantidad_letras.cpp
+Recibe como argumentos un fichero de diccionario y un fichero de letras, crea el LettersSet y el Dictionary con la información de dichos ficheros, y para cada letra del
+diccionario calcula el número de veces que se usa esa letra y el número de ocurrencias de la letra en la estructura de diccionario.
+
+Pasando como argumentos **data/diccionario_mini.txt y data/letras_mini.txt**, obtenemos como salida:
+
+Letra Usos Ocurrencias
+
+A 8 3
+
+C 3 1
+
+L 2 2
+
+M 4 1
+
+O 4 2
+
+R 2 2
+
+Z 1 1
+
+---
+### Partida_letras.cpp
+Recibe como argumentos el archivo que contiene el diccionario, el archivo que contiene la información de las letras, 'L' o 'P' indicando el sistema de juego y
+un entero que indica el número de letras que se extraen en la partida.
+
+El programa se encargará de construir el LettersSet para la partida a partir del archivo de letras,
+el Dictionary con las palabras que se consideran soluciones correctas, el Solver que va a jugar la
+partida y la LettersBag que se utilizará para extraer las letras. Una vez construidos los TDAs
+necesarios, extraerá las letras con las que se jugará la partida, utilizará el Solver para buscar las
+soluciones, e imprimirá por pantalla tanto las letras para la partida como las mejores soluciones que
+se pueden obtener con dichas letras y la puntuación de dichas soluciones.
+
+Pasando como argumentos **data/diccionario.txt data/letras.txt L 10** obtenemos como salida:
+
+LETRAS DISPONIBLES:
+
+N E U E S M S L E I
+
+SOLUCIONES:
+
+melense
+
+siemens
+
+PUNTUACION:
+
+7
+
+
+*Este *programa* *dispone* *de* *un* *factor* *de* *aleatoriedad*, *por* *lo* *que* *los* *mismos* *argumentos* *no* *implican* *mismas* *salidas*.
+
+---
+### Palabras_validas_diccionario.cpp
+
+El funcionamiento de este archivo es simple. Se carga el contenido del archivo que se pasa como argumento en un diccionario con
+estructura de árbol. El resto de argumentos que se pasan en la llamada al programa son las letras disponibles que se utilizan para formar palabras.
+Se recorre el diccionario creado con un iterador, y se imprimen por pantalla sus palabras
+válidas según las letras especificadas.
+Si el iterador anterior está correctamente implementado, el programa deberá funcionar con
+normalidad, devolviendo las palabras válidas en orden alfabético.
+
+Pasando como argumento **data/diccionario.txt** obtenemos como salida:
+
+a
+
+ah
+
+aho
+
+al
+
+h
+
+ha
+
+halo
+
+hao
+
+hola
+
+l
+
+la
+
+lo
+
+loa
+
+o
+
+oh
+
+ola
+
+---
+### Partida_letras_eficiente.cpp
+
+Recibe como argumentos el archivo que contiene el diccionario, el archivo que contiene la información de las letras, 'L' o 'P' indicando el sistema de juego y
+un entero que indica el número de letras que se extraen en la partida.
+
+El programa se encargará de construir el LettersSet para la partida a partir del archivo de letras,
+el Dictionary con las palabras que se consideran soluciones correctas, el Solver que va a jugar la
+partida y la LettersBag que se utilizará para extraer las letras. Una vez construidos los TDAs
+necesarios, extraerá las letras con las que se jugará la partida, utilizará el Solver para buscar las
+soluciones, e imprimirá por pantalla tanto las letras para la partida como las mejores soluciones que
+se pueden obtener con dichas letras y la puntuación de dichas soluciones.
+
+Pasando como argumentos **data/diccionario.txt data/letras.txt L 10** obtenemos como salida:
+
+LETRAS DISPONIBLES:
+
+E H I R Z A O I O S
+
+SOLUCIONES:
+
+zaherio
+
+PUNTUACION:
+
+7
+
+---
+### Analisis_eficiencia.cpp
+
+Tras haber proporcionado dos Solvers al problema de las letras queda la duda de hasta qué punto
+es más eficiente el segundo de ellos. Para ello planteamos enfrentar ambas soluciones (correctas
+ellas dos) con la intención de comprobar empíricamente el grado de mejora. Lo abordaremos con más
+profundidad en la siguiente sección.
+
+---
+
+# Análisis empírico de eficiencia
+
+
+Tras haber proporcionado dos Solvers al problema de las letras queda la duda de cómo de significativo es el grado de mejora de que
+proporciona la segunda solución.
+
+Desde un punto de vista teórico es fácil deducir que el número de palabras que nos devuelve el
+iterador de palabras válidas es menor o igual que el número de palabras devuelto por el iterador
+del diccionario. Por tanto, en el peor de los casos ambos tienen la misma eficiencia, no siendo así
+en el resto de los casos al tener que comprobar menos palabras.
+
+Implementamos esta comparativa en el ejecutable **analisis_eficiencia.cpp**, en el que seguimos los siguientes pasos:
+
+- El programa recibe como argumentos dos archivos, que contienen un diccionario y un archivo de información de letras, respectivamente.
+- Se crean dos objetos de tipo Dictionary y LettersSet con la información suministrada.
+- Se calculan los datos haciendo uso de las funciones que explicamos a continuación:
+    - **void experiment_solver(int n, int repetitions, Dictionary dictionary, LettersSet lettersSet)**
+
+    Inicializa el experimento antes del bucle de conteo de tiempo para no afectar al correcto análisis. Se mide el tiempo antes de iniciar el experimento
+    y se realiza el experimento tantas veces como indique repetitions, para conseguir cierta robustez en el resultado. Al finalizar, se vuelve a medir
+    el tiempo y se calcula la diferencia entre el inicio y el final. Por último, se divide el tiempo total entre el número de repeticiones para obtener el tiempo medio por ejecución.
+
+    - **void experiment_solverEficiente(int n, int repetitions, Dictionary dictionary, LettersSet lettersSet)**
+
+    Esta función es análoga a la anterior, tomando SolverEficiente en lugar de Solver.
+
+Para mayor detalle, dejamos a disposición del ususario unos gráficos que ilustran visulamente los resultados de esta comparativa.
+
+
+![Tiempo / número de letras](tiempo_letras.png)
+
+
+
+![](tiempo_tamano.png)
 
 */

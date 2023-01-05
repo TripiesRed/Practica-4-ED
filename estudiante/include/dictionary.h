@@ -281,21 +281,57 @@ public:
 
     class possible_words_iterator {
     public:
+
+        /**
+         * @brief Constructor por defecto.
+         */
         possible_words_iterator();
 
+        /**
+         * @brief Constructor con parámetros
+         * @param current_node Nodo en el que va a comenzar el iterador.
+         * @param available_letters Vector de caracteres disponibles para formar palabras.
+         */
         possible_words_iterator(node current_node, vector<char> available_letters);
 
+        /**
+         * @brief Constructor de copia
+         * @param iter Iterador que se copia.
+         */
         possible_words_iterator(const possible_words_iterator &other);
 
+        /**
+         * @brief Operador de asignación.
+         * @param other Iterador que se va a asignar.
+         * @return Devuelve una copia del iterador @p other.
+         */
         possible_words_iterator &operator=(const possible_words_iterator &other);
 
+        /**
+         * @brief Comprueba si los iteradores son iguales.
+         * @param other El iterador con el que se compara.
+         * @return true si son iguales, false en caso contrario.
+         */
         bool operator==(const possible_words_iterator &other) const;
 
+        /**
+         * @brief Comprueba si los iteradores son iguales.
+         * @param other El iterador con el que se compara.
+         * @return false si son iguales, true en caso contrario.
+         */
         bool operator!=(const possible_words_iterator &other) const;
 
+        /**
+         * @brief Avanza hacia el siguiente iterador.
+         * @return Devuelve el siguiente iterador.
+         */
         possible_words_iterator &operator++();
 
-        std::string operator*() const;
+        /**
+         * @brief Obtiene el contenido del iterador.
+         * @return Devuelve la palabra contenida en el iterador.
+         */
+        string operator*() const;
 
     private:
         multiset<char> available_letters;
@@ -314,8 +350,16 @@ public:
 
     };
 
+    /**
+    * @brief Iterador a la primera palabra del diccionario.
+    * @return Devuelve un iterador a la primera palabra del diccionario.
+    */
     possible_words_iterator possible_words_begin(vector<char> available_characters) const;
 
+    /**
+     * @brief Apunta a la siguiente de la última palabra del diccionario.
+     * @return Devuelve un iterador que apunta a la siguiente de la última palabra del diccionario.
+     */
     possible_words_iterator possible_words_end() const;
 };
 

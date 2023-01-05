@@ -240,10 +240,18 @@ Implementamos esta comparativa en el ejecutable **analisis_eficiencia.cpp**, en 
 Para mayor detalle, dejamos a disposición del ususario unos gráficos que ilustran visulamente los resultados de esta comparativa.
 
 
-![Tiempo / número de letras](tiempo_letras.png)
+![Tiempo / Tamaño Diccionario](tiempo_tamDiccionario.png)
+
+En este gráfico podemos observar como el tiempo que tarda en encontrar las soluciones el Solver aumenta exponencialmente
+a medida que el tamaño del diccionario utilizado también va aumentando. No ocurre esto con el SolverEficiente, cuyos tiempos también
+se incrementan pero de forma más lineal.
 
 
+![Tiempo / Número de Letras](tiempo_numeroletras.png)
 
-![](tiempo_tamano.png)
+En este gráfico podemos observar como el tiempo que tarda en encontrar las soluciones el Solver y el SolverEficiente, aumentan
+de forma lineal conforme el número de palabras utilizadas va aumentando. Así pues, el incremento de tiempo en el SolverEficiente
+es proporcionalmente mucho menor que el del Solver.
+
 
 */
